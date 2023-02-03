@@ -54,6 +54,7 @@ function buildTask(task, index) {
   checkboxEl.setAttribute('type', 'checkbox')
   checkboxEl.classList.add('task__check')
   checkboxEl.id = checkboxId
+  checkboxEl.checked = task.done
 
   titleEl.setAttribute('for', checkboxId)
   titleEl.classList.add('task__title')
@@ -72,6 +73,16 @@ function buildTask(task, index) {
   taskEl.appendChild(checkboxEl)
   taskEl.appendChild(titleEl)
   taskEl.appendChild(deleteBtn)
+  
+  taskEl.addEventListener('click', (ev) => {
+    ev.preventDefault()
+    task.done = !task.done
+    checkboxEl.checked = task.done
+
+    console.log(!task.done)
+    saveToLocal()
+  })
+
   taskListEl.appendChild(taskEl)
 }
 
